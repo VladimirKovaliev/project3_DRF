@@ -41,7 +41,7 @@ class MotoMilageSerializer(serializers.ModelSerializer):
 
 
 class MotoCreateSerializer(serializers.ModelSerializer):
-    milage = MilageSerializer(many=True, source='milage')
+    milage = MilageSerializer(many=True)
 
     class Meta:
         model = Moto

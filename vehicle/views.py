@@ -1,3 +1,5 @@
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter
 from rest_framework import viewsets, \
     generics  # по дефолту импортируется rest_framework.serializers import ModelSerializer, но я оставил так для единобразия
 
@@ -36,6 +38,14 @@ class MotoDestroyAPIView(generics.DestroyAPIView):  # Для удаления м
 
 class MilageCreateAPIView(generics.CreateAPIView):
     serializer_class = MilageSerializer
+
+
+class MilageListAPIView(generics.ListAPIView):
+    serializer_class = MilageSerializer
+    queryset = Milage.objects.all()
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    filterset_fields = ('car', 'moto')
+    ordering_fields = ('year',)
 
 
 class MotoMilageListAPIView(generics.ListAPIView):
