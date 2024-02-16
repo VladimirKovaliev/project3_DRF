@@ -5,6 +5,7 @@ from rest_framework import viewsets, \
 from rest_framework.permissions import IsAuthenticated
 
 from vehicle.models import Car, Moto, Milage
+from vehicle.paginators import VehiclePaginator
 from vehicle.permissions import IsOwnerOrStaff
 from vehicle.serliazers import CarSerializer, MotoSerializer, MilageSerializer, MotoMilageSerializer, \
     MotoCreateSerializer
@@ -29,6 +30,7 @@ class MotoCreateAPIView(generics.CreateAPIView):
 class MotoListAPIView(generics.ListAPIView):  # Для просмотра всех мотоциклов
     serializer_class = MotoSerializer  # Обязательное поле
     queryset = Moto.objects.all()  # Обязательное поле
+    pagination_class = VehiclePaginator
 
 
 class MotoRetrieveAPIView(generics.RetrieveAPIView):  # Для просмотра одного мотоцикла

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from vehicle.models import Car, Moto, Milage
+from vehicle.valitdators import TitleValidator
 
 
 class MilageSerializer(serializers.ModelSerializer):
@@ -46,6 +47,10 @@ class MotoCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Moto
         fields = '__all__'
+        validators = [
+            TitleValidator(field='title'),
+            serializers.UniqueTogetherValidator(fields=['title', 'description'], queryset=Moto.objects.all())
+        ]
 
     def create(self, validated_data):
         milage = validated_data.pop('milage')
