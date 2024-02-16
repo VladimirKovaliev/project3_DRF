@@ -12,8 +12,8 @@ class MilageSerializer(serializers.ModelSerializer):
 
 class CarSerializer(serializers.ModelSerializer):
     # first нужнен, тк в модели ordering стоит -year, и для получения первого нужно писать first
-    last_milage = serializers.IntegerField(source='milage.all.first.milage')
-    milage = MilageSerializer(many=True)
+    last_milage = serializers.IntegerField(source='milage.all.first.milage', read_only=True)
+    milage = MilageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Car
