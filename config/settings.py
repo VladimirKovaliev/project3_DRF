@@ -147,3 +147,8 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "https://read-and-write.example.com",
 ]
+
+
+CUR_API_URL = 'https://api.currencyapi.com/'
+
+CUR_API_KEY = 'cur_live_RiKuHbYeTt2FFmkHHsOfayPpS14iCu1EwrutYP3v'

@@ -13,7 +13,7 @@ class MilageSerializer(serializers.ModelSerializer):
 
 class CarSerializer(serializers.ModelSerializer):
     # first нужнен, тк в модели ordering стоит -year, и для получения первого нужно писать first
-    last_milage = serializers.IntegerField(source='milage.all.first.milage', read_only=True)
+    # last_milage = serializers.IntegerField(source='milage.all.first.milage', read_only=True)
     milage = MilageSerializer(many=True)
     usd_price = serializers.SerializerMethodField()
 
@@ -22,7 +22,7 @@ class CarSerializer(serializers.ModelSerializer):
         fields = '__all__'  # либо ('title', 'description')
 
     def get_usd_price(self, instance):
-        return convert_currencies(instance)
+        return convert_currencies(instance.amount)
 
 
 class MotoSerializer(serializers.ModelSerializer):
