@@ -11,6 +11,6 @@ def convert_currencies(rub_price):
     )
     if response.status_code == status.HTTP_200_OK:
         usd_rate = response.json()['data']['RUB']['value']
-    usd_price = rub_price * usd_rate
+        usd_price = rub_price * usd_rate
 
     return usd_price
