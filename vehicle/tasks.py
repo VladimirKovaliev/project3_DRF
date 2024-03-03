@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from celery import shared_task
+from django.core.mail import send_mail
 
 from vehicle.models import Car, Moto
 
@@ -23,4 +26,14 @@ def check_milage(pk, model):
 
 
 def check_filter():
-    filter_price = {''}
+    filter_price = {'price__lte': 500}
+    # now = datetime.datetime.now()    # настройка может понадобиться для работы с почтой
+    if Car.objects.filter(**filter_price).exists():
+        print('Отчет по фильтру. Чтобы отправлялось письмо, нужно убрать #')
+        # send_mail(
+        #     subject='Отчет по фильтру',
+        #     message='У нас есть машины под ваш фильтр'
+        #     from_email='admin@admin.com',
+        #     recipient_list=[user.email]
+        # )
+
